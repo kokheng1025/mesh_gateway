@@ -30,9 +30,9 @@
 import enum
 import logging
 
-from aci.aci_utils import value_to_barray
-from aci.aci_evt import Event
-import aci.aci_cmd as cmd
+from interactive_pyaci.aci.aci_utils import value_to_barray
+from interactive_pyaci.aci.aci_evt import Event
+import interactive_pyaci.aci.aci_cmd as cmd
 
 
 class AccessStatus(enum.Enum):

@@ -64,6 +64,10 @@ class MainWindow(QMainWindow):
     def configure_uart_device(self):
         dialog = QDialog(None, Qt.WindowSystemMenuHint)       
         self.uart_ui.setup_ui(dialog)
-        #self.uart_ui.set_uart_status(False)
         dialog.exec_()
         dialog.deleteLater()
+
+        if self.uart_ui.get_uart_device_status() == True:
+            self.status_uart.setPixmap(QPixmap("././icons/switch_on.png"))
+        else:
+            self.status_uart.setPixmap(QPixmap("././icons/switch_off.png"))

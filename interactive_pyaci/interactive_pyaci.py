@@ -43,22 +43,22 @@ import colorama
 from argparse import ArgumentParser
 import traitlets.config
 
-from aci.aci_uart import Uart
-from aci.aci_utils import STATUS_CODE_LUT
-from aci.aci_config import ApplicationConfig
-import aci.aci_cmd as cmd
-import aci.aci_evt as evt
+from interactive_pyaci.aci.aci_uart import Uart
+from interactive_pyaci.aci.aci_utils import STATUS_CODE_LUT
+from interactive_pyaci.aci.aci_config import ApplicationConfig
+import interactive_pyaci.aci.aci_cmd as cmd
+import interactive_pyaci.aci.aci_evt as evt
 
-from mesh import access
-from mesh.provisioning import Provisioner, Provisionee  # NOQA: ignore unused import
-from mesh import types as mt                            # NOQA: ignore unused import
-from mesh.database import MeshDB                        # NOQA: ignore unused import
-from models.config import ConfigurationClient           # NOQA: ignore unused import
-from models.generic_on_off import GenericOnOffClient    # NOQA: ignore unused import
-from models.lighting_control import LightingControlClient
+from interactive_pyaci.mesh import access
+from interactive_pyaci.mesh.provisioning import Provisioner, Provisionee  # NOQA: ignore unused import
+from interactive_pyaci.mesh import types as mt                            # NOQA: ignore unused import
+from interactive_pyaci.mesh.database import MeshDB                        # NOQA: ignore unused import
+from interactive_pyaci.models.config import ConfigurationClient           # NOQA: ignore unused import
+from interactive_pyaci.models.generic_on_off import GenericOnOffClient    # NOQA: ignore unused import
+from interactive_pyaci.models.lighting_control import LightingControlClient
 
 
-LOG_DIR = os.path.join(os.path.dirname(sys.argv[0]), "log")
+LOG_DIR = os.path.join(os.getcwd() + os.sep, 'interactive_pyaci', 'Log')
 
 USAGE_STRING = \
     """
@@ -78,8 +78,8 @@ COLOR_LIST = [colorama.Fore.MAGENTA, colorama.Fore.CYAN,
 COLOR_INDEX = 0
 
 
-def configure_logger(device_name):
-    global options
+def configure_logger(device_name, logging_enable):
+    #global options
     global COLOR_INDEX
 
     logger = logging.getLogger(device_name)
@@ -93,10 +93,10 @@ def configure_logger(device_name):
 
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setFormatter(stream_formatter)
-    stream_handler.setLevel(options.log_level)
+    stream_handler.setLevel(3) # 3=Info
     logger.addHandler(stream_handler)
 
-    if not options.no_logfile:
+    if logging_enable >= 1:
         dt = DateTime.DateTime()
         logfile = "{}_{}-{}-{}-{}_output.log".format(
             device_name, dt.yy(), dt.dayOfYear(), dt.hour(), dt.minute())
@@ -116,18 +116,17 @@ class Interactive(object):
     DEFAULT_STATIC_AUTH_DATA = bytearray([0xDD] * 16)
     DEFAULT_LOCAL_UNICAST_ADDRESS_START = 0x0001
     CONFIG = ApplicationConfig(
-        header_path=os.path.join(os.path.dirname(sys.argv[0]),
-                                 ("../../examples/serial/include/"
-                                  + "nrf_mesh_config_app.h")))
+        header_path=os.path.join(os.getcwd(), 'interactive_pyaci', "nrf_mesh_config_app.h"))
+                                 
     PRINT_ALL_EVENTS = True
 
-    def __init__(self, acidev):
+    def __init__(self, acidev, logging_enable):
         self.acidev = acidev
         self._event_filter = []
         self._event_filter_enabled = True
         self._other_events = []
 
-        self.logger = configure_logger(self.acidev.device_name)
+        self.logger = configure_logger(self.acidev.device_name, logging_enable)
         self.send = self.acidev.write_aci_cmd
 
         # Increment the local unicast address range
@@ -147,6 +146,9 @@ class Interactive(object):
 
     def close(self):
         self.acidev.stop()
+    
+    def dev_still_running(self):
+        return self.acidev.still_running()
 
     def events_get(self):
         return self._other_events

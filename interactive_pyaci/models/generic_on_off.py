@@ -27,8 +27,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from mesh.access import Model, Opcode
-from models.common import TransitionTime
+from interactive_pyaci.mesh.access import Model, Opcode
+from interactive_pyaci.models.common import TransitionTime
 import struct
 
 

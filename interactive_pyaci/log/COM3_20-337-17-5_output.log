@@ -1,0 +1,15 @@
+2020-12-02 17:05:36,831 - DEBUG - COM3: exited read event
+2020-12-02 17:05:40,611 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:05:43,782 - DEBUG - COM3: exited read event
+2020-12-02 17:05:43,782 - DEBUG - COM3: exited read event
+2020-12-02 17:05:51,383 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:05:51,383 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:06:06,800 - DEBUG - COM3: exited read event
+2020-12-02 17:06:06,800 - DEBUG - COM3: exited read event
+2020-12-02 17:06:06,800 - DEBUG - COM3: exited read event
+2020-12-02 17:06:09,899 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:06:09,899 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:06:09,899 - DEBUG - COM3: log Opening port COM3, baudrate 115200, rtscts True
+2020-12-02 17:06:18,880 - DEBUG - COM3: exited read event
+2020-12-02 17:06:18,880 - DEBUG - COM3: exited read event
+2020-12-02 17:06:18,880 - DEBUG - COM3: exited read event

@@ -31,7 +31,7 @@ import json
 import datetime
 import re
 
-from mesh import types as mt
+from interactive_pyaci.mesh import types as mt
 
 
 def snakeify(name):

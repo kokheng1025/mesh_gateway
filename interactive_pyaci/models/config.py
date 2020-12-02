@@ -30,8 +30,8 @@
 import json
 import struct
 
-from mesh.access import Model, Opcode, AccessStatus
-import mesh.types as mt
+from interactive_pyaci.mesh.access import Model, Opcode, AccessStatus
+import interactive_pyaci.mesh.types as mt
 
 
 def log2b(value):

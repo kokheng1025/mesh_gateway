@@ -34,9 +34,9 @@ from cryptography.hazmat.primitives.serialization import \
     Encoding, PrivateFormat, PublicFormat, NoEncryption, \
     load_der_private_key, load_der_public_key
 
-import aci.aci_cmd as cmd
-from aci.aci_evt import Event
-from mesh import types as mt
+import interactive_pyaci.aci.aci_cmd as cmd
+from interactive_pyaci.aci.aci_evt import Event
+from interactive_pyaci.mesh import types as mt
 
 
 PRIVATE_BYTES_START = 36

@@ -32,8 +32,8 @@ import traceback
 import threading
 import collections
 from serial import Serial
-from aci.aci_cmd import CommandPacket
-from aci.aci_evt import event_deserialize
+from interactive_pyaci.aci.aci_cmd import CommandPacket
+from interactive_pyaci.aci.aci_evt import event_deserialize
 import queue
 
 EVT_Q_BUF = 128
@@ -147,6 +147,9 @@ class Uart(threading.Thread, Device):
     def stop(self):
         self.keep_running = False
         self.kill_writer()
+
+    def still_running(self):
+        return self.keep_running
 
     def get_packet_from_uart(self):
         tmp = bytearray([])
